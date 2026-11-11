@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Painel da Rifa</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/common.js" defer></script>
+  <script src="js/admin.js" defer></script>
+</head>
+<body class="admin">
+  <header class="admin-topo">
+    <div class="wrap admin-topo-linha">
+      <h1>Painel da Rifa</h1>
+      <div class="admin-topo-acoes">
+        <span id="modo-info"></span>
+        <a class="btn btn-peq" href="./" target="_blank" rel="noopener">Ver site</a>
+        <button type="button" class="btn btn-peq" id="btn-sair" hidden>Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LOGIN -->
+  <section class="wrap admin-card" id="tela-login">
+    <h2>Entrar</h2>
+    <p>Este painel só grava com um <strong>token do GitHub</strong> com acesso ao repositório do site. Sem ele, nada pode ser alterado. O token fica apenas neste navegador.</p>
+    <form id="form-login" class="form-grade" autocomplete="off">
+      <label>Usuário do GitHub <input id="in-owner" required spellcheck="false" autocapitalize="none"></label>
+      <label>Repositório <input id="in-repo" required spellcheck="false" autocapitalize="none" placeholder="rifadasorte"></label>
+      <label>Branch <input id="in-branch" value="main" required spellcheck="false" autocapitalize="none"></label>
+      <label class="col-2">Token (fine-grained) <input id="in-token" type="password" required spellcheck="false" autocapitalize="none" placeholder="github_pat_…"></label>
+      <label class="check col-2"><input type="checkbox" id="in-lembrar"> Lembrar o token neste aparelho (não use em computador compartilhado)</label>
+      <div class="col-2 linha-botoes">
+        <button type="submit" class="btn btn-primario">Entrar</button>
+        <button type="button" class="btn" id="btn-modo-teste">Testar sem salvar (dados locais)</button>
+      </div>
+      <p class="erro col-2" id="login-erro" hidden></p>
+    </form>
+    <details class="ajuda">
+      <summary>Como criar o token</summary>
+      <ol>
+        <li>GitHub → Settings → Developer settings → Personal access tokens → <strong>Fine-grained tokens</strong> → Generate new token.</li>
+        <li>Expiration: 60 dias. Repository access: <strong>Only select repositories</strong> → escolha o repositório da rifa.</li>
+        <li>Permissions → Repository permissions → <strong>Contents: Read and write</strong>. Nada mais.</li>
+        <li>Copie o token e cole aqui. Ao final da rifa, apague o token no GitHub.</li>
+      </ol>
+    </details>
+  </section>
+
+  <!-- PAINEL -->
+  <main class="wrap" id="tela-painel" hidden>
+    <div class="admin-stats" id="admin-stats"></div>
+    <div class="aviso" id="aviso-esgotado" hidden>🎉 Todas as cotas estão pagas! Defina a data do sorteio antecipado em “Datas e status”.</div>
+
+    <div class="admin-pendente" id="barra-pendente">
+      <p id="pendente-texto">Nenhuma alteração pendente.</p>
+      <div class="linha-botoes">
+        <button type="button" class="btn btn-primario" id="btn-publicar" disabled>Publicar alterações</button>
+        <button type="button" class="btn" id="btn-descartar" disabled>Descartar</button>
+        <button type="button" class="btn" id="btn-recarregar">Recarregar</button>
+        <button type="button" class="btn" id="btn-baixar">Baixar JSON</button>
+      </div>
+      <ul class="pendente-lista" id="pendente-lista"></ul>
+    </div>
+
+    <section class="admin-card">
+      <h2>Números</h2>
+      <div class="form-grade">
+        <label>Números (ex.: 7, 15, 20-25)
+          <input id="in-nums" inputmode="numeric" spellcheck="false" placeholder="7, 15, 20-25">
+        </label>
+        <label>@ do comprador
+          <input id="in-ig" spellcheck="false" autocapitalize="none" list="admin-handles" placeholder="@fulano">
+          <datalist id="admin-handles"></datalist>
+        </label>
+      </div>
+      <p class="dica">Toque nos números da grade para selecionar, ou digite acima. Para confirmar o pagamento de uma reserva, deixe o @ em branco ou use “Selecionar números do @”.</p>
+      <div class="linha-botoes">
+        <button type="button" class="btn btn-reservar" id="btn-reservar">Reservar (<span data-min>10</span> min)</button>
+        <button type="button" class="btn btn-pagar" id="btn-pagar">Marcar como pago</button>
+        <button type="button" class="btn btn-liberar" id="btn-liberar">Liberar</button>
+        <button type="button" class="btn" id="btn-sel-ig">Selecionar números do @</button>
+        <button type="button" class="btn" id="btn-limpar-sel">Limpar seleção</button>
+      </div>
+      <p class="sel-info" id="sel-info"></p>
+      <ul class="legenda">
+        <li><span class="bolinha disponivel"></span>Disponível</li>
+        <li><span class="bolinha reservado"></span>Reservado</li>
+        <li><span class="bolinha pago"></span>Pago</li>
+        <li><span class="bolinha alterado"></span>Alterado (não publicado)</li>
+      </ul>
+      <div class="grade grade-admin" id="admin-grade"></div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Datas e status</h2>
+      <div class="form-grade">
+        <label>Data/hora do sorteio (Brasília)
+          <input type="datetime-local" id="cfg-dataLimite">
+        </label>
+        <label>Data máxima se adiar (Brasília)
+          <input type="datetime-local" id="cfg-dataMaximaAdiamento">
+        </label>
+        <div class="col-2 linha-botoes">
+          <button type="button" class="btn" id="btn-adiar">Adiar sorteio (usar só uma vez)</button>
+          <span id="adiado-info"></span>
+        </div>
+        <label>Sorteio antecipado (se esgotar)
+          <input type="datetime-local" id="cfg-dataSorteioAntecipado">
+        </label>
+        <div class="linha-botoes alinhar-fim">
+          <button type="button" class="btn" id="btn-limpar-antecipado">Remover antecipação</button>
+        </div>
+        <label>Status
+          <select id="cfg-status">
+            <option value="aberta">Aberta (vendendo)</option>
+            <option value="encerrada">Encerrada (aguardando sorteio)</option>
+            <option value="sorteada">Sorteada (mostrar resultado)</option>
+          </select>
+        </label>
+        <label>Minutos de reserva
+          <input type="number" id="cfg-reservaMinutos" min="1" max="1440">
+        </label>
+      </div>
+
+      <h3>Encerrar vendas</h3>
+      <p class="dica">Antes da live: encerra as vendas, calcula o hash SHA-256 da lista de pagos e mostra no site. Leia o hash na live.</p>
+      <div class="linha-botoes">
+        <button type="button" class="btn btn-primario" id="btn-encerrar">Encerrar vendas e gerar hash</button>
+      </div>
+      <p class="hash-admin"><code id="hash-admin"></code></p>
+
+      <h3>Resultado</h3>
+      <div class="form-grade">
+        <label>Número sorteado
+          <input type="number" id="res-numero" min="1">
+        </label>
+        <label>Link do vídeo no Instagram
+          <input type="url" id="res-video" placeholder="https://www.instagram.com/p/…" spellcheck="false">
+        </label>
+        <p class="col-2 dica" id="res-info"></p>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Textos da página</h2>
+      <div class="form-grade">
+        <label class="col-2">Título <input id="cfg-titulo"></label>
+        <label>Prêmio <input id="cfg-premio"></label>
+        <label>Arquivo da foto (pasta img/) <input id="cfg-foto" spellcheck="false" placeholder="img/whisky.jpg"></label>
+        <label>Chave Pix <input id="cfg-pixChave" spellcheck="false"></label>
+        <label>Nome do recebedor do Pix <input id="cfg-pixNomeRecebedor"></label>
+        <label>Instagram (sem @) <input id="cfg-instagram" spellcheck="false" autocapitalize="none"></label>
+        <label>Preço por número (R$) <input type="number" id="cfg-precoNumero" min="0.01" step="0.01"></label>
+        <label class="col-2">Sua história <textarea id="cfg-historia" rows="8"></textarea></label>
+        <label class="col-2">Descrição do prêmio <textarea id="cfg-descricaoPremio" rows="8"></textarea></label>
+      </div>
+      <p class="dica">Separe parágrafos com uma linha em branco.</p>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

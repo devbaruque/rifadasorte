@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Rifa Solidária – Whisky Gold Bar</title>
+  <meta name="description" content="Rifa solidária de um Whisky Gold Bar Bourbon The Original. R$ 1,00 por número. Ajude nas despesas médicas e da casa.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rifa Solidária – Whisky Gold Bar">
+  <meta property="og:description" content="R$ 1,00 por número. Escolha seus números e ajude nas despesas médicas e da casa.">
+  <meta name="theme-color" content="#0f0d0a">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/common.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <figure class="hero-foto">
+        <img id="foto" src="img/whisky.jpg" alt="Garrafa do Whisky Gold Bar Bourbon The Original com a moeda Lady Of Fortune" width="900" height="1600">
+      </figure>
+      <div class="hero-info">
+        <p class="eyebrow">Rifa solidária</p>
+        <h1 id="titulo">Rifa Solidária – Whisky Gold Bar</h1>
+        <p class="hero-premio" data-cfg="premio"></p>
+        <p class="hero-preco"><strong id="preco">R$ 1,00</strong> por número · <span data-cfg="totalNumeros">500</span> números</p>
+
+        <div class="progresso" aria-live="polite">
+          <div class="progresso-barra" role="progressbar" aria-label="Números vendidos" aria-valuemin="0" id="progresso-barra">
+            <span id="progresso-fill"></span>
+          </div>
+          <p class="progresso-texto"><strong id="qtd-pagos">0</strong> de <span data-cfg="totalNumeros">500</span> vendidos · <span id="qtd-disponiveis">500</span> disponíveis</p>
+        </div>
+
+        <div class="contagem" id="contagem">
+          <p class="contagem-titulo" id="contagem-titulo">Sorteio</p>
+          <div class="contagem-caixas" id="contagem-caixas">
+            <div><strong id="cd-d">--</strong><span>dias</span></div>
+            <div><strong id="cd-h">--</strong><span>horas</span></div>
+            <div><strong id="cd-m">--</strong><span>min</span></div>
+            <div><strong id="cd-s">--</strong><span>seg</span></div>
+          </div>
+        </div>
+
+        <div class="acoes">
+          <a href="#numeros" class="btn btn-primario">Escolher meus números</a>
+          <a href="#como-comprar" class="btn">Como comprar</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="faixa" id="faixa-status" hidden></div>
+
+  <main>
+    <section class="secao secao-resultado" id="resultado" hidden>
+      <div class="wrap">
+        <h2>🏆 Resultado do sorteio</h2>
+        <div class="resultado-card">
+          <p>Número sorteado</p>
+          <p class="resultado-numero" id="resultado-numero"></p>
+          <p class="resultado-ig" id="resultado-ig"></p>
+          <a class="btn btn-primario" id="resultado-video" target="_blank" rel="noopener noreferrer" hidden>Assistir ao vídeo do sorteio</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="historia">
+      <div class="wrap estreito">
+        <h2>Por que estou fazendo esta rifa</h2>
+        <div class="texto" id="historia-texto"></div>
+      </div>
+    </section>
+
+    <section class="secao secao-alt" id="premio">
+      <div class="wrap estreito">
+        <h2>O prêmio</h2>
+        <p class="destaque" data-cfg="premio"></p>
+        <div class="texto" id="premio-texto"></div>
+      </div>
+    </section>
+
+    <section class="secao" id="como-comprar">
+      <div class="wrap">
+        <h2>Como comprar seus números</h2>
+        <ol class="passos">
+          <li>
+            <h3>Escolha seus números</h3>
+            <p>Na grade abaixo, toque nos números <strong>disponíveis</strong> que você quer. O site monta a mensagem para você.</p>
+          </li>
+          <li>
+            <h3>Mande um direct</h3>
+            <p>Envie os números para <a data-ig-link target="_blank" rel="noopener noreferrer"><span data-cfg-ig></span></a>. Eles ficam <strong>reservados por <span data-cfg="reservaMinutos">10</span> minutos</strong> com o seu @.</p>
+          </li>
+          <li>
+            <h3>Faça o Pix</h3>
+            <p><span data-cfg-preco>R$ 1,00</span> por número para a chave abaixo. Se o Pix não for confirmado em <span data-cfg="reservaMinutos">10</span> minutos, os números voltam a ficar disponíveis.</p>
+          </li>
+          <li>
+            <h3>Envie o comprovante</h3>
+            <p>Mande o comprovante no mesmo direct. <strong>Vale a ordem dos comprovantes pagos</strong>: se dois pedirem o mesmo número, fica com quem pagou primeiro.</p>
+          </li>
+          <li>
+            <h3>Pronto!</h3>
+            <p>Seu @ aparece no lugar do número, em <strong class="txt-pago">verde</strong>. Use a busca para conferir seus números.</p>
+          </li>
+        </ol>
+
+        <div class="pix-card">
+          <div>
+            <p class="pix-rotulo">Chave Pix (e-mail)</p>
+            <p class="pix-chave" data-cfg="pixChave"></p>
+            <p class="pix-nome" id="pix-nome" hidden>Recebedor: <strong data-cfg="pixNomeRecebedor"></strong></p>
+          </div>
+          <div class="pix-botoes">
+            <button type="button" class="btn btn-primario" id="btn-copiar-pix">Copiar chave Pix</button>
+            <a class="btn" data-ig-link target="_blank" rel="noopener noreferrer">Abrir meu Instagram</a>
+            <a class="btn" href="https://sorteador.com.br/" target="_blank" rel="noopener noreferrer">Conhecer o Sorteador</a>
+          </div>
+          <p class="pix-aviso">⚠️ A única chave oficial é <strong data-cfg="pixChave"></strong>. Confira sempre antes de pagar e desconfie de cópias deste site.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao secao-alt" id="numeros">
+      <div class="wrap">
+        <h2>Números</h2>
+
+        <form class="busca" id="form-busca" role="search" autocomplete="off">
+          <label for="busca">Quais números o @ comprou?</label>
+          <div class="busca-linha">
+            <input type="search" id="busca" list="lista-handles" placeholder="@seuinstagram" inputmode="text" autocapitalize="none" spellcheck="false">
+            <button type="submit" class="btn btn-primario">Buscar</button>
+            <button type="button" class="btn" id="btn-limpar-busca" hidden>Limpar</button>
+          </div>
+          <datalist id="lista-handles"></datalist>
+        </form>
+        <div class="busca-resultado" id="busca-resultado" aria-live="polite" hidden></div>
+
+        <div class="grade-topo">
+          <div class="filtros" role="group" aria-label="Filtrar números">
+            <button type="button" class="filtro ativo" data-filtro="todos">Todos</button>
+            <button type="button" class="filtro" data-filtro="disponiveis">Disponíveis</button>
+            <button type="button" class="filtro" data-filtro="vendidos">Vendidos</button>
+          </div>
+          <ul class="legenda">
+            <li><span class="bolinha disponivel"></span>Disponível</li>
+            <li><span class="bolinha reservado"></span>Reservado</li>
+            <li><span class="bolinha pago"></span>Pago</li>
+          </ul>
+        </div>
+
+        <div class="grade" id="grade" aria-label="Grade de números"></div>
+        <p class="carregando" id="carregando">Carregando números…</p>
+      </div>
+    </section>
+
+    <section class="secao" id="ranking">
+      <div class="wrap estreito">
+        <h2>Top 3 compradores</h2>
+        <ol class="ranking" id="ranking-lista"></ol>
+      </div>
+    </section>
+
+    <section class="secao secao-alt" id="sorteio">
+      <div class="wrap estreito">
+        <h2>Como será o sorteio</h2>
+        <ul class="regras">
+          <li><strong>Data:</strong> sorteio em <span data-cfg-data="dataLimite"></span>. Se nem todos os números forem vendidos, a data pode ser estendida <strong>uma única vez</strong>, até <span data-cfg-data="dataMaximaAdiamento"></span>.</li>
+          <li><strong>Esgotou antes?</strong> Se as <span data-cfg="totalNumeros">500</span> cotas forem vendidas antes, o sorteio é antecipado e a nova data é avisada aqui e no Instagram.</li>
+          <li><strong>Ao vivo:</strong> o sorteio será feito em uma live no Instagram <span data-cfg-ig></span>, usando o site <a href="https://sorteador.com.br/" target="_blank" rel="noopener noreferrer">sorteador.com.br</a>, configurado de 1 a <span data-cfg="totalNumeros">500</span>.</li>
+          <li><strong>Números não vendidos:</strong> se na data final ainda houver números sem dono e o número sorteado não tiver sido vendido, o sorteio é refeito até sair um número pago.</li>
+          <li><strong>Vídeo:</strong> a gravação da live fica fixada na grade do Instagram para conferência a qualquer momento.</li>
+          <li><strong>Maiores de 18 anos:</strong> o prêmio é uma bebida alcoólica. Só será entregue a maiores de 18 anos.</li>
+          <li><strong>Entrega:</strong> combinada diretamente com o ganhador pelo direct do Instagram.</li>
+        </ul>
+
+        <h3>Transparência</h3>
+        <ul class="regras">
+          <li>Ninguém além do organizador consegue alterar esta página. Cada número cadastrado fica registrado publicamente no histórico do projeto<span id="link-historico-wrap" hidden> (<a id="link-historico" target="_blank" rel="noopener noreferrer">ver histórico de alterações</a>)</span>.</li>
+          <li>Antes da live, as vendas são encerradas e publicamos uma “impressão digital” (hash SHA-256) da lista final. Se qualquer nome ou número mudar, o código muda.</li>
+        </ul>
+        <div class="hash-card" id="hash-card" hidden>
+          <p>Hash SHA-256 da lista final:</p>
+          <code id="hash-valor"></code>
+          <p id="hash-confere"></p>
+          <details>
+            <summary>Ver a lista usada no cálculo</summary>
+            <pre id="hash-lista"></pre>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">
+      <p>Organização: <a data-ig-link target="_blank" rel="noopener noreferrer"><span data-cfg-ig></span></a> · Obrigado por ajudar! 💛</p>
+    </div>
+  </footer>
+
+  <div class="barra-selecao" id="barra-selecao" hidden>
+    <div class="wrap barra-conteudo">
+      <div class="barra-info">
+        <strong id="sel-qtd">0 números</strong> · <span id="sel-total">R$ 0,00</span>
+        <p id="sel-lista"></p>
+      </div>
+      <div class="barra-botoes">
+        <a class="btn btn-primario" id="btn-enviar-direct" target="_blank" rel="noopener noreferrer">Copiar e enviar direct</a>
+        <button type="button" class="btn" id="btn-limpar-sel">Limpar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Foto do whisky em breve">
+  <rect width="400" height="500" fill="#1e1912"/>
+  <g fill="none" stroke="#d9a441" stroke-width="6" stroke-linejoin="round">
+    <path d="M175 70h50v70c0 18 35 30 35 70v220a20 20 0 0 1-20 20h-80a20 20 0 0 1-20-20V210c0-40 35-52 35-70z"/>
+    <circle cx="200" cy="320" r="34"/>
+  </g>
+  <text x="200" y="320" font-family="Georgia, serif" font-size="22" fill="#f1c96b" text-anchor="middle" dominant-baseline="middle">★</text>
+  <text x="200" y="478" font-family="system-ui, sans-serif" font-size="18" fill="#9a8d78" text-anchor="middle">Coloque a foto em img/whisky.jpg</text>
+</svg>
