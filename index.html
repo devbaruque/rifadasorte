@@ -227,25 +227,26 @@
         <button type="button" class="btn btn-primario" id="dlg-copiar-pedido">Copiar pedido</button>
       </li>
       <li>
-        <h3>Faça o Pix de <span id="dlg-total">R$ 0,00</span></h3>
-        <p>Chave Pix (e-mail): <strong class="dlg-chave" data-cfg="pixChave"></strong></p>
-        <button type="button" class="btn" id="dlg-copiar-pix">Copiar chave Pix</button>
-      </li>
-      <li>
         <h3>Mande no direct de <span data-cfg-ig></span></h3>
         <div id="dlg-instrucao-app" hidden>
           <p>Você está no navegador do Instagram. Para mandar o direct:</p>
           <ol class="mini-passos">
             <li>Toque no <strong>✕</strong> lá no canto de cima da tela para voltar ao Instagram.</li>
             <li>Abra o perfil <strong data-cfg-ig></strong> e toque em <strong>Mensagem</strong>.</li>
-            <li>Cole o pedido e envie o <strong>comprovante do Pix</strong>.</li>
+            <li>Cole o pedido e envie.</li>
           </ol>
         </div>
         <div id="dlg-instrucao-web" hidden>
-          <p>Cole o pedido no direct e envie o <strong>comprovante do Pix</strong>.</p>
+          <p>Cole o pedido no direct e envie.</p>
           <a class="btn" data-ig-link target="_blank" rel="noopener noreferrer">Abrir o Instagram</a>
           <p class="dica">Se o Instagram ficar carregando, abra o app, procure <strong data-cfg-ig></strong> e toque em <strong>Mensagem</strong>.</p>
         </div>
+      </li>
+      <li>
+        <h3>Faça o Pix de <span id="dlg-total">R$ 0,00</span> e mande o comprovante</h3>
+        <p>Chave Pix (e-mail): <strong class="dlg-chave" data-cfg="pixChave"></strong></p>
+        <button type="button" class="btn" id="dlg-copiar-pix">Copiar chave Pix</button>
+        <p class="dica">Envie o <strong>comprovante do Pix</strong> no mesmo direct. A chave também está no link da bio, se precisar voltar aqui.</p>
       </li>
     </ol>
     <p class="dica">Seus números ficam reservados quando o direct chegar, por <span data-cfg="reservaMinutos">10</span> minutos, até o Pix ser confirmado.</p>

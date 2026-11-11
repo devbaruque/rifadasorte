@@ -486,7 +486,7 @@
     $('dlg-copiar-pedido').addEventListener('click', function () {
       if (!estado.data) return;
       R.copiarTexto(mensagemSelecao()).then(function (ok) {
-        toast(ok ? 'Pedido copiado! ✅ Agora faça o Pix.' : 'Não deu para copiar. Segure o dedo no texto do pedido para copiar.');
+        toast(ok ? 'Pedido copiado! ✅ Agora mande no direct.' : 'Não deu para copiar. Segure o dedo no texto do pedido para copiar.');
       });
     });
     $('dlg-copiar-pix').addEventListener('click', function () {

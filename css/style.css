@@ -287,6 +287,7 @@ body.dialogo-aberto { overflow: hidden; }
 .mini-passos li { counter-increment: none; padding: 0; margin-bottom: .4em; background: none; border: 0; }
 .mini-passos li::before { content: none; }
 .dialogo .dica { margin: 0 0 8px; }
+.passos-dialogo .btn + .dica { margin: 10px 0 0; }
 
 /* ---------- admin ---------- */
 .admin-topo { background: var(--bg-alt); border-bottom: 1px solid var(--borda); padding: 12px 0; position: sticky; top: 0; z-index: 10; }
