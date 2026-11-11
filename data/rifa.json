@@ -7,7 +7,7 @@
     "historia": "Olá! Sou o Luiz. Recentemente fui vítima de um assalto. Além do susto, saí dele com o braço e a perna quebrados, vários arranhões pelo corpo e ainda perdi bens materiais importantes.\n\nCom a recuperação, as despesas médicas e as contas de casa começaram a se acumular. Por isso resolvi fazer esta rifa: cada número custa só R$ 1,00 e todo o valor arrecadado vai para o meu tratamento e para colocar a casa em ordem de novo.\n\nCriei esta página por conta própria para não perder dinheiro com taxas de plataformas e para que tudo seja transparente: aqui você acompanha, em tempo real, quem comprou cada número. Muito obrigado por qualquer ajuda — comprar um número ou compartilhar esta página já faz muita diferença! 🙏",
     "precoNumero": 1,
     "totalNumeros": 500,
-    "pixChave": "devbaruque@gmail.com",
+    "pixChave": "dev.baruque@gmail.com",
     "pixNomeRecebedor": "",
     "instagram": "luizrochadev",
     "reservaMinutos": 10,
@@ -18,7 +18,7 @@
     "status": "aberta",
     "hashListaFinal": null,
     "resultado": null,
-    "repositorio": ""
+    "repositorio": "devbaruque/rifadasorte"
   },
   "numeros": {}
 }
