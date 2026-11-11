@@ -1,6 +1,6 @@
 # Rifa da Sorte
 
-Site estático da rifa solidária do **Whisky Gold Bar Bourbon The Original** (500 números a R$ 1,00), hospedado de graça no GitHub Pages.
+Site estático da rifa solidária do **Whisky Gold Bar The Original** (blended whiskey, 1 L) (500 números a R$ 1,00), hospedado de graça no GitHub Pages.
 
 - O público só **vê** a página. Não existe servidor nem banco de dados para invadir.
 - Todos os dados ficam em um único arquivo: [`data/rifa.json`](data/rifa.json).
