@@ -58,7 +58,7 @@
     var ig = c.instagram ? '@' + c.instagram : '';
     document.querySelectorAll('[data-cfg-ig]').forEach(function (node) { node.textContent = ig; });
     document.querySelectorAll('[data-ig-link]').forEach(function (node) {
-      node.href = 'https://instagram.com/' + encodeURIComponent(c.instagram);
+      node.href = R.linkPerfilInstagram(c.instagram);
     });
     $('pix-nome').hidden = !c.pixNomeRecebedor;
 
@@ -328,7 +328,7 @@
     $('sel-qtd').textContent = nums.length + (nums.length === 1 ? ' número' : ' números');
     $('sel-total').textContent = R.formatarBRL(nums.length * c.precoNumero);
     $('sel-lista').textContent = lista;
-    $('btn-enviar-direct').href = 'https://ig.me/m/' + encodeURIComponent(c.instagram);
+    $('btn-enviar-direct').href = R.linkPerfilInstagram(c.instagram);
   }
 
   function mensagemSelecao() {
@@ -451,9 +451,9 @@
     $('btn-enviar-direct').addEventListener('click', function () {
       if (!estado.data) return;
       R.copiarTexto(mensagemSelecao()).then(function (ok) {
-        toast(ok ? 'Mensagem copiada! Cole no direct do Instagram.' : 'Abra o direct e envie os números selecionados.');
+        toast(ok ? 'Mensagem copiada! No perfil, toque em "Mensagem" e cole.' : 'No perfil, toque em "Mensagem" e envie os números selecionados.');
       });
-      // o link segue normalmente para o direct
+      // o link segue normalmente para o perfil do Instagram
     });
 
     $('btn-limpar-sel').addEventListener('click', function () {

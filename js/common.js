@@ -39,6 +39,12 @@
     return s ? '@' + s : '';
   }
 
+  /** Link do perfil (https://www.instagram.com/fulano/). Abre o app no celular; lá o botão "Mensagem" leva ao direct. */
+  function linkPerfilInstagram(valor) {
+    var h = normalizarHandle(valor).slice(1);
+    return 'https://www.instagram.com/' + encodeURIComponent(h) + '/';
+  }
+
   function handleValido(h) {
     return typeof h === 'string' && HANDLE_RE.test(h);
   }
@@ -249,6 +255,7 @@
 
   global.Rifa = {
     normalizarHandle: normalizarHandle,
+    linkPerfilInstagram: linkPerfilInstagram,
     handleValido: handleValido,
     repoValido: repoValido,
     pad: pad,
