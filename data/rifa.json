@@ -76,6 +76,11 @@
       "status": "pago",
       "em": "2026-11-11T16:07:09.136Z"
     },
+    "115": {
+      "ig": "@angelicasantosof",
+      "status": "pago",
+      "em": "2026-11-11T21:32:59.917Z"
+    },
     "152": {
       "ig": "@bakaoliveira",
       "status": "pago",
@@ -86,15 +91,30 @@
       "status": "pago",
       "em": "2026-11-11T16:07:09.136Z"
     },
+    "161": {
+      "ig": "@angelicasantosof",
+      "status": "pago",
+      "em": "2026-11-11T21:32:59.917Z"
+    },
     "181": {
       "ig": "@paulatsantos.beauty",
       "status": "pago",
       "em": "2026-11-11T16:07:09.136Z"
     },
+    "200": {
+      "ig": "@angelicasantosof",
+      "status": "pago",
+      "em": "2026-11-11T21:32:59.917Z"
+    },
     "213": {
       "ig": "@bakaoliveira",
       "status": "pago",
       "em": "2026-11-11T18:45:45.610Z"
+    },
+    "222": {
+      "ig": "@angelicasantosof",
+      "status": "pago",
+      "em": "2026-11-11T21:32:59.917Z"
     },
     "225": {
       "ig": "@paulatsantos.beauty",
@@ -175,6 +195,11 @@
       "ig": "@paulatsantos.beauty",
       "status": "pago",
       "em": "2026-11-11T16:07:09.136Z"
+    },
+    "500": {
+      "ig": "@angelicasantosof",
+      "status": "pago",
+      "em": "2026-11-11T21:32:59.917Z"
     }
   }
 }
