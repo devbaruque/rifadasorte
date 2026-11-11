@@ -240,7 +240,8 @@
       ta.value = texto;
       ta.setAttribute('readonly', '');
       ta.className = 'copia-oculta';
-      document.body.appendChild(ta);
+      // Com uma janela modal aberta, o resto da página fica inerte; o campo precisa ficar dentro dela.
+      (document.querySelector('dialog[open]') || document.body).appendChild(ta);
       ta.select();
       var ok = false;
       try { ok = document.execCommand('copy'); } catch (e) { ok = false; }

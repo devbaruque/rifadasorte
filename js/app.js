@@ -323,12 +323,36 @@
     var nums = Array.from(estado.selecionados).sort(function (a, b) { return a - b; });
     document.body.classList.toggle('com-barra', nums.length > 0);
     barra.hidden = !nums.length;
-    if (!nums.length) return;
+    if (!nums.length) { fecharFinalizar(); return; }
     var lista = nums.map(function (n) { return R.pad(n, c.totalNumeros); }).join(', ');
     $('sel-qtd').textContent = nums.length + (nums.length === 1 ? ' número' : ' números');
     $('sel-total').textContent = R.formatarBRL(nums.length * c.precoNumero);
     $('sel-lista').textContent = lista;
-    $('btn-enviar-direct').href = R.linkPerfilInstagram(c.instagram);
+    $('dlg-pedido').textContent = mensagemSelecao();
+    $('dlg-total').textContent = R.formatarBRL(nums.length * c.precoNumero);
+  }
+
+  /* ---------- janela "Finalizar compra" ---------- */
+
+  // Quem vem do link da bio abre o site no navegador interno do Instagram (ou do Facebook).
+  // Lá dentro, links para instagram.com ficam carregando sem parar, então só orientamos a voltar ao app.
+  var NAVEGADOR_INTERNO = /Instagram|FBAN|FBAV/i.test(navigator.userAgent || '');
+
+  function abrirFinalizar() {
+    var dlg = $('dlg-finalizar');
+    $('dlg-instrucao-app').hidden = !NAVEGADOR_INTERNO;
+    $('dlg-instrucao-web').hidden = NAVEGADOR_INTERNO;
+    if (dlg.open) return;
+    if (typeof dlg.showModal === 'function') dlg.showModal();
+    else { dlg.setAttribute('open', ''); dlg.classList.add('sem-modal'); }
+    document.body.classList.add('dialogo-aberto');
+  }
+
+  function fecharFinalizar() {
+    var dlg = $('dlg-finalizar');
+    if (!dlg.open) return;
+    if (typeof dlg.close === 'function') dlg.close();
+    else { dlg.removeAttribute('open'); dlg.classList.remove('sem-modal'); dlg.dispatchEvent(new Event('close')); }
   }
 
   function mensagemSelecao() {
@@ -448,12 +472,28 @@
       });
     });
 
-    $('btn-enviar-direct').addEventListener('click', function () {
+    $('btn-finalizar').addEventListener('click', function () {
+      if (!estado.data || !estado.selecionados.size) return;
+      abrirFinalizar();
+    });
+    $('dlg-fechar').addEventListener('click', fecharFinalizar);
+    $('dlg-finalizar').addEventListener('close', function () {
+      document.body.classList.remove('dialogo-aberto');
+    });
+    $('dlg-finalizar').addEventListener('click', function (ev) {
+      if (ev.target === ev.currentTarget) fecharFinalizar(); // toque fora da janela
+    });
+    $('dlg-copiar-pedido').addEventListener('click', function () {
       if (!estado.data) return;
       R.copiarTexto(mensagemSelecao()).then(function (ok) {
-        toast(ok ? 'Mensagem copiada! No perfil, toque em "Mensagem" e cole.' : 'No perfil, toque em "Mensagem" e envie os números selecionados.');
+        toast(ok ? 'Pedido copiado! ✅ Agora faça o Pix.' : 'Não deu para copiar. Segure o dedo no texto do pedido para copiar.');
       });
-      // o link segue normalmente para o perfil do Instagram
+    });
+    $('dlg-copiar-pix').addEventListener('click', function () {
+      if (!estado.data) return;
+      R.copiarTexto(estado.data.config.pixChave).then(function (ok) {
+        toast(ok ? 'Chave Pix copiada! ✅' : 'Não deu para copiar. Chave: ' + estado.data.config.pixChave);
+      });
     });
 
     $('btn-limpar-sel').addEventListener('click', function () {

@@ -93,7 +93,7 @@
           </li>
           <li>
             <h3>Mande um direct</h3>
-            <p>Envie os números para <a data-ig-link target="_blank" rel="noopener noreferrer"><span data-cfg-ig></span></a>. Eles ficam <strong>reservados por <span data-cfg="reservaMinutos">10</span> minutos</strong> com o seu @.</p>
+            <p>Envie os números no direct de <a data-ig-link target="_blank" rel="noopener noreferrer"><span data-cfg-ig></span></a> (no app do Instagram, abra o perfil e toque em <strong>Mensagem</strong>). Eles ficam <strong>reservados por <span data-cfg="reservaMinutos">10</span> minutos</strong> com o seu @.</p>
           </li>
           <li>
             <h3>Faça o Pix</h3>
@@ -209,11 +209,47 @@
         <p id="sel-lista"></p>
       </div>
       <div class="barra-botoes">
-        <a class="btn btn-primario" id="btn-enviar-direct" target="_blank" rel="noopener noreferrer">Copiar e enviar direct</a>
+        <button type="button" class="btn btn-primario" id="btn-finalizar">Finalizar compra</button>
         <button type="button" class="btn" id="btn-limpar-sel">Limpar</button>
       </div>
     </div>
   </div>
+
+  <dialog class="dialogo" id="dlg-finalizar" aria-labelledby="dlg-titulo">
+    <div class="dialogo-topo">
+      <h2 id="dlg-titulo">Falta pouco! 3 passos</h2>
+      <button type="button" class="dialogo-fechar" id="dlg-fechar" aria-label="Fechar">✕</button>
+    </div>
+    <ol class="passos passos-dialogo">
+      <li>
+        <h3>Copie seu pedido</h3>
+        <p class="pedido" id="dlg-pedido"></p>
+        <button type="button" class="btn btn-primario" id="dlg-copiar-pedido">Copiar pedido</button>
+      </li>
+      <li>
+        <h3>Faça o Pix de <span id="dlg-total">R$ 0,00</span></h3>
+        <p>Chave Pix (e-mail): <strong class="dlg-chave" data-cfg="pixChave"></strong></p>
+        <button type="button" class="btn" id="dlg-copiar-pix">Copiar chave Pix</button>
+      </li>
+      <li>
+        <h3>Mande no direct de <span data-cfg-ig></span></h3>
+        <div id="dlg-instrucao-app" hidden>
+          <p>Você está no navegador do Instagram. Para mandar o direct:</p>
+          <ol class="mini-passos">
+            <li>Toque no <strong>✕</strong> lá no canto de cima da tela para voltar ao Instagram.</li>
+            <li>Abra o perfil <strong data-cfg-ig></strong> e toque em <strong>Mensagem</strong>.</li>
+            <li>Cole o pedido e envie o <strong>comprovante do Pix</strong>.</li>
+          </ol>
+        </div>
+        <div id="dlg-instrucao-web" hidden>
+          <p>Cole o pedido no direct e envie o <strong>comprovante do Pix</strong>.</p>
+          <a class="btn" data-ig-link target="_blank" rel="noopener noreferrer">Abrir o Instagram</a>
+          <p class="dica">Se o Instagram ficar carregando, abra o app, procure <strong data-cfg-ig></strong> e toque em <strong>Mensagem</strong>.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="dica">Seus números ficam reservados quando o direct chegar, por <span data-cfg="reservaMinutos">10</span> minutos, até o Pix ser confirmado.</p>
+  </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
